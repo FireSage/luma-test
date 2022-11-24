@@ -1,4 +1,4 @@
-// import faker from '@faker-js/faker';
+const { faker } = require("@faker-js/faker");
 
 const RegisterPage = require('../pageobjects/register.page');
 
@@ -59,21 +59,23 @@ describe('Luma Registration function', () => {
     it('Should register user with valid information', async function(){
         await RegisterPage.open();
         let firstname = faker.name.firstName();
-        let laststname = faker.name.lastName();
-        let email = faker.name.email();
+        let lastname = faker.name.lastName();
+        let email = faker.internet.email();
 
-        await RegisterPage.register("first", "name", "email@qualityw.jm", "P@ssword1", "P@assword1");
-        await RegisterPage.register("first", "name", "email@qualityw.jm", "P@ssword1", "P@assword1");
+        await RegisterPage.register(firstname, lastname, email, "P@ssword1", "P@ssword1");
+        // await RegisterPage.register("first", "name", "email@qualityw.jm", "P@ssword1", "P@assword1");
 
-        await expect(browser).toHaveUrl('https://magento.softwaretestingboard.com/customer/account');
         
-        await expect(RegisterPage.alert).toBeExistingxist();
+        await expect(browser).toHaveUrl('https://magento.softwaretestingboard.com/customer/account/');
+        
+        await expect(RegisterPage.alert).toBeExisting();
+        
         await expect(RegisterPage.alert).toHaveTextContaining(
         'Thank you for registering with Fake Online Clothing Store.');
         
-        await expect(RegisterPage.welcomeMessage).toBeExistingxist();
-        await expect(RegisterPage.alert).toHaveTextContaining(
-        `Welcome, ${lastname} ${firstname}`);
+        await expect(RegisterPage.welcomeMessage).toBeExisting();
+        await expect(RegisterPage.welcomeMessage).toHaveTextContaining(
+        `Welcome, ${firstname} ${lastname}!`);
     });
     
 

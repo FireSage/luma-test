@@ -1,7 +1,7 @@
 const HomePage = require('../pageobjects/home.page');
 
 describe("Add to cart functionalty", async function(){
-	/*it("Add an item to the cart sucessfully with all options selected", async function(){
+	it("Add an item to the cart sucessfully with all options selected", async function(){
 		// open webpage
 		await HomePage.open();
 		
@@ -48,6 +48,6 @@ describe("Add to cart functionalty", async function(){
 		await expect(HomePage.alert).toBeExisting();
 		await expect(HomePage.alert).toHaveTextContaining("You need to choose options for your item.");
 		// await HomePage.txtMiniCartName.waitForExist({timeout: 3000});
-	});*/
+	});
 
 });

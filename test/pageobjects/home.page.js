@@ -42,6 +42,10 @@ class HomePage extends Page {
         return $('.showcart');
     }
 
+    get btnMiniCartCheckout () {
+        return $('#top-cart-btn-checkout');
+    }
+
     get txtMiniCartName () {
         return $('#mini-cart .item:nth-child(1) .product-item-name a');
     }

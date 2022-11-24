@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx kill-port 444 && npx wdio run wdio.conf.js",
+    "test": "npx kill-port 4444 && npx wdio run wdio.conf.js",
     "posttest": "C:\\Windows\\System32\\taskkill /IM \"java.exe\" /F"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "faker": "^5.5.3",
     "webdriverio": "^7.26.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@wdio/allure-reporter": "^7.26.0",
     "@wdio/cli": "^7.26.0",
     "@wdio/local-runner": "^7.26.0",

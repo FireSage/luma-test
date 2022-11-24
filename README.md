@@ -1,8 +1,11 @@
-#Luma shop test automation
+# Luma shop test automation
 
 
-#Setup
+## Setup
 Clone the repository
 Open the folder in your shell (such as bash or power shell)
-Run "npm install" to install dependencies
+Run 
+```bash
+"npm install" 
+``` to install dependencies
 Run "npm run test" to run all tests
