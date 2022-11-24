@@ -23,6 +23,10 @@ exports.config = {
     specs: [
         './test/specs/**/*.js'
     ],
+    // suites: [
+    //         signup: ["./test/specs/register.e2e.js"],
+    //         addtocart: ["./test/specs/addtocart.e2e.js"]
+    //     ],
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
