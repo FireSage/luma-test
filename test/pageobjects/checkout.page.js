@@ -6,7 +6,7 @@ const Page = require('./page');
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class HomePage extends Page {
+class CheckoutPage extends Page {
     /**
      * define selectors using getter methods
      */
@@ -61,7 +61,7 @@ class HomePage extends Page {
     }
 
     get txtOrderNumber () {
-        return $('.order-number]');
+        return $('.order-number');
     }
 
     get btnCheckout () {
@@ -100,7 +100,10 @@ class HomePage extends Page {
 
     async checkout(){
         await this.btnCheckout.click();
-        this.orderId = this.txtOrderNumber.getText(); 
+        this.orderId = await this.txtOrderNumber.getText();
+        console.log("---------------------------------------------------\n\n");
+        console.log(this.orderId);
+        console.log("---------------------------------------------------\n\n");
     }
 
     /**
@@ -112,4 +115,4 @@ class HomePage extends Page {
 
 }
 
-module.exports = new HomePage();
+module.exports = new CheckoutPage();
