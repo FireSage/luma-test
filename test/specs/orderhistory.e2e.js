@@ -6,7 +6,7 @@ const OrderHistoryPage = require('../pageobjects/orderhistory.page');
 describe("Order history", function(){
 	beforeEach(async function(){
 		await LoginPage.open();
-		await LoginPage.login("email1@qualityw.jm","P@ssword1");
+		await LoginPage.login(userData.email, userData.password);
 	});
 	it("Verify that puchase is added to order history", async function(){
 		// open webpage

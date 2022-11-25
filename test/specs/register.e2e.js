@@ -1,9 +1,12 @@
 const { faker } = require("@faker-js/faker");
 
+const userData = require('../data/user.data');
+const urlData = require('../data/url.data');
 const RegisterPage = require('../pageobjects/register.page');
 
 
 describe('Luma Registration function', () => {
+
     it('Should not register user with required fields empty', async () => {
         await RegisterPage.open();
 
@@ -28,7 +31,7 @@ describe('Luma Registration function', () => {
     it('Should not register user with invalid email', async function(){
         await RegisterPage.open();
 
-        await RegisterPage.register("first", "name", "email", "P@ssword1", "P@ssword1");
+        await RegisterPage.register(faker.name.firstName(), faker.name.lastName(), "email", userData.password, userData.password);
 
         await expect(RegisterPage.errorEmail).toBeExisting();
         await expect(RegisterPage.errorEmail).toHaveTextContaining(
@@ -38,7 +41,7 @@ describe('Luma Registration function', () => {
     it('Should not register user with invalid password', async function(){
         await RegisterPage.open();
 
-        await RegisterPage.register("first", "name", "email", "P@", "P@");
+        await RegisterPage.register(faker.name.firstName(), faker.name.lastName(), faker.internet.email(), "P@", "P@");
 
         await expect(RegisterPage.errorPassword).toBeExisting();
         await expect(RegisterPage.errorPassword).toHaveTextContaining(
@@ -48,7 +51,7 @@ describe('Luma Registration function', () => {
     it('Should not register user with invalid confirmation password', async function(){
         await RegisterPage.open();
 
-        await RegisterPage.register("first", "name", "email@qualityw.jm", "P@ssword1", "P@assword2");
+        await RegisterPage.register(faker.name.firstName(), faker.name.lastName(), faker.internet.email(), userData.password, "P@assword2");
 
         await expect(RegisterPage.errorPasswordConfirm).toBeExisting();
         await expect(RegisterPage.errorPasswordConfirm).toHaveTextContaining(
@@ -58,15 +61,11 @@ describe('Luma Registration function', () => {
 
     it('Should register user with valid information', async function(){
         await RegisterPage.open();
-        let firstname = faker.name.firstName();
-        let lastname = faker.name.lastName();
-        let email = faker.internet.email();
 
-        await RegisterPage.register(firstname, lastname, email, "P@ssword1", "P@ssword1");
-        // await RegisterPage.register("first", "name", "email@qualityw.jm", "P@ssword1", "P@assword1");
+        await RegisterPage.register(userData.firstname, userData.lastname, faker.internet.email(), userData.password, userData.password);
 
         
-        await expect(browser).toHaveUrl('https://magento.softwaretestingboard.com/customer/account/');
+        await expect(browser).toHaveUrl(urlData.user_account);
         
         await expect(RegisterPage.alert).toBeExisting();
         
@@ -75,7 +74,7 @@ describe('Luma Registration function', () => {
         
         await expect(RegisterPage.welcomeMessage).toBeExisting();
         await expect(RegisterPage.welcomeMessage).toHaveTextContaining(
-        `Welcome, ${firstname} ${lastname}!`);
+        `Welcome, ${userData.firstname} ${userData.lastname}!`);
     });
     
 

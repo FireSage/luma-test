@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+const userData = require('../data/user.data');
 
 const HomePage = require('../pageobjects/home.page');
 const CheckoutPage = require('../pageobjects/checkout.page');
@@ -8,7 +9,7 @@ const LoginPage = require('../pageobjects/login.page');
 describe("Checkout functionalty", async function(){
 	beforeEach(async function(){
 		await LoginPage.open();
-		await LoginPage.login("email1@qualityw.jm","P@ssword1");
+		await LoginPage.login(userData.email, userData.password);
 	});
 	it("Should checkout with valid shipping details", async function(){
 		// open webpage
@@ -22,11 +23,20 @@ describe("Checkout functionalty", async function(){
 		await expect(HomePage.alert).toHaveTextContaining("You added Radiant Tee to your shopping cart.");
 		await HomePage.txtMiniCartName.waitForExist({timeout: 10000});
 		await HomePage.btnMiniCartShow.click();
-		await HomePage.btnMiniCartCheckout.waitForClickable({timeout: 10000});
-		await HomePage.btnMiniCartCheckout.click();
+		try{
+			await HomePage.btnMiniCartCheckout.waitForClickable({timeout: 10000});
+			await HomePage.btnMiniCartCheckout.click();
+		}catch(error){
+			await CheckoutPage.ope();
+			console.error(error)
+		}
 
 
-		await CheckoutPage.chooseShipping("faker.address.street", "Kingston", "Kingston", "00000", "JM");
+		await CheckoutPage.chooseShipping(userData.shipping_address.street, 
+			userData.shipping_address.city, 
+			userData.shipping_address.state, 
+			userData.shipping_address.zip, 
+			userData.shipping_address.country.id);
 		await CheckoutPage.checkout();
 
 

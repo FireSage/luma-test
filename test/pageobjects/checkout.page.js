@@ -109,9 +109,9 @@ class CheckoutPage extends Page {
     /**
      * overwrite specific options to adapt it to page object
      */
-    // open () {
-    //     return super.open('');
-    // }
+    open () {
+         return super.open('checkout/cart/');
+    }
 
 }
 

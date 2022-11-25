@@ -24,7 +24,7 @@ describe("Add to cart functionalty", async function(){
         await expect(HomePage.txtMiniCartPrice).toHaveTextContaining(product.price);
 	});
 
-	it("Should not add an item to the cart sucessfully without size selected", async function(){
+	it("Should NOT add an item to the cart without size selected", async function(){
 		// open webpage
 		await HomePage.open();
 		
@@ -37,7 +37,7 @@ describe("Add to cart functionalty", async function(){
 		// await HomePage.txtMiniCartName.waitForExist({timeout: 3000});
 	});
 
-	it("Should not add an item to the cart sucessfully without color selected", async function(){
+	it("Should NOT add an item to the cart without color selected", async function(){
 		// open webpage
 		await HomePage.open();
 		
