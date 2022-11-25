@@ -101,9 +101,6 @@ class CheckoutPage extends Page {
     async checkout(){
         await this.btnCheckout.click();
         this.orderId = await this.txtOrderNumber.getText();
-        console.log("---------------------------------------------------\n\n");
-        console.log(this.orderId);
-        console.log("---------------------------------------------------\n\n");
     }
 
     /**

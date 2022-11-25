@@ -72,6 +72,7 @@ class HomePage extends Page {
         }
         
         // click add to cart
+        await this.btnAddToCart.waitForClickable();
         await this.btnAddToCart.click();
 
         return {name: product_name, price: product_price, initial_cart_count: initial_cart_count}

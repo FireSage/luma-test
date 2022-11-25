@@ -23,14 +23,8 @@ describe("Checkout functionalty", async function(){
 		await expect(HomePage.alert).toHaveTextContaining("You added Radiant Tee to your shopping cart.");
 		await HomePage.txtMiniCartName.waitForExist({timeout: 10000});
 		await HomePage.btnMiniCartShow.click();
-		try{
-			await HomePage.btnMiniCartCheckout.waitForClickable({timeout: 10000});
-			await HomePage.btnMiniCartCheckout.click();
-		}catch(error){
-			await CheckoutPage.ope();
-			console.error(error)
-		}
-
+		await HomePage.btnMiniCartCheckout.waitForClickable({timeout: 10000});
+		await HomePage.btnMiniCartCheckout.click();
 
 		await CheckoutPage.chooseShipping(userData.shipping_address.street, 
 			userData.shipping_address.city, 
