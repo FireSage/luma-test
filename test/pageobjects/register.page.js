@@ -1,3 +1,4 @@
+const fs = require('fs')
 
 
 const Page = require('./page');
@@ -61,10 +62,7 @@ class RegisterPage extends Page {
         return $('.panel.header > .header.links li.welcome');
     }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
+    // fill out and submit the registration form
     async register (firstname="", lastname="", email="", password="", passwordConfirmation="") {
 
         await this.inputFirstname.setValue(firstname);
@@ -78,6 +76,20 @@ class RegisterPage extends Page {
         await this.inputPasswordConfirm.setValue(passwordConfirmation);
 
         await this.btnSubmit.click();
+    }
+
+    // Save the login inifor for any user created during registration test
+    saveLoginInfo(email, password){
+        const path = "\\..\\data\\login.data.json";
+
+        const fileEncoding = "utf8"
+
+        let users = JSON.parse(fs.readFileSync(__dirname+path));
+
+        users.push({email:email, password: password});
+
+        fs.writeFileSync(__dirname+path, JSON.stringify(users, null, 4), fileEncoding)
+
     }
 
     /**

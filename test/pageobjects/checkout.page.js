@@ -68,24 +68,30 @@ class CheckoutPage extends Page {
         return $('button.checkout[type=submit]');
     }
 
+    // Hande shipping method page used selected shipping address
+    // if availabe. Adds shipping address if none exist 
     async chooseShipping(Street, City, State, Zip, Country, Phone) {
         let noAddressAvailable = false;
+        // wait for clickable will throw error if element isn't found
+        // we use this to determine if the address for is on the page 
+        // if not the page should have shipping address selected 
         try{
             await this.selectCountry.waitForClickable();
             noAddressAvailable = await this.selectCountry.isExisting();
         }catch (error) {
-
+            console.error(error);
         }
-        // let noAddressAvailable = await this.selectCountry.isExisting();
+        
         if(noAddressAvailable){
-            this.fillShippingAddress();
+            await this.fillShippingAddress(Street, City, State, Zip, Country, Phone);
         }
 
         await this.btnNext.waitForClickable({timeout: 10000});
         await this.btnNext.click();
     }
 
-    async fillShippingAddress(){
+    // Fill out shipping address
+    async fillShippingAddress(Street, City, State, Zip, Country, Phone){
         await this.selectCountry.selectByAttribute('value', Country);
         await this.txtZip.setValue(Zip);
 
@@ -98,6 +104,7 @@ class CheckoutPage extends Page {
         await this.txtPhone.setValue(State);
     }
 
+    // Click checkout button to finalise purchase
     async checkout(){
         await this.btnCheckout.click();
         this.orderId = await this.txtOrderNumber.getText();

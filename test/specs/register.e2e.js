@@ -49,6 +49,7 @@ describe('Luma Registration function', () => {
     });
 
     it('Should not register user with invalid confirmation password', async function(){
+        
         await RegisterPage.open();
 
         await RegisterPage.register(faker.name.firstName(), faker.name.lastName(), faker.internet.email(), userData.password, "P@assword2");
@@ -60,9 +61,12 @@ describe('Luma Registration function', () => {
 
 
     it('Should register user with valid information', async function(){
+        const email = faker.internet.email();
+        const password = faker.internet.password(20, false, /[a-zA-Z0-9_+#!]/);
+
         await RegisterPage.open();
 
-        await RegisterPage.register(userData.firstname, userData.lastname, faker.internet.email(), userData.password, userData.password);
+        await RegisterPage.register(userData.firstname, userData.lastname, email, password, password);
 
         
         await expect(browser).toHaveUrl(urlData.user_account);
@@ -75,6 +79,8 @@ describe('Luma Registration function', () => {
         await expect(RegisterPage.welcomeMessage).toBeExisting();
         await expect(RegisterPage.welcomeMessage).toHaveTextContaining(
         `Welcome, ${userData.firstname} ${userData.lastname}!`);
+
+        RegisterPage.saveLoginInfo(email, password);
     });
     
 

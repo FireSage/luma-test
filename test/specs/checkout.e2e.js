@@ -9,8 +9,14 @@ const LoginPage = require('../pageobjects/login.page');
 describe("Checkout functionalty", async function(){
 	beforeEach(async function(){
 		await LoginPage.open();
+		// --------------Test with predefined test user
 		await LoginPage.login(userData.email, userData.password);
+
+		// --------------Test with random user generated during registration test
+		// const user = await LoginPage.loadRandomLoginInfo();
+		// await LoginPage.login(user.email, user.password);
 	});
+
 	it("Should checkout with valid shipping details", async function(){
 		// open webpage
 		await HomePage.open();
@@ -30,12 +36,11 @@ describe("Checkout functionalty", async function(){
 			userData.shipping_address.city, 
 			userData.shipping_address.state, 
 			userData.shipping_address.zip, 
-			userData.shipping_address.country.id);
+			userData.shipping_address.country.id,
+			userData.shipping_address.phone
+			);
 		await CheckoutPage.checkout();
 
-
-		// await expect(HomePage.txtMiniCartName).toHaveTextContaining(product.name);
-        // await expect(HomePage.txtMiniCartPrice).toHaveTextContaining(product.price);
 	});
 /*
 	it("Should not checkout with invalid shipping", async function(){

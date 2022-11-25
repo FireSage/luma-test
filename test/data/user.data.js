@@ -12,5 +12,6 @@ module.exports = {
 			name: "Jamaica", 
 			id: "JM"
 		},
+		phone: "876-554-7898"
 	}
 }

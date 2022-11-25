@@ -54,7 +54,7 @@ class HomePage extends Page {
         return $('#mini-cart .item:nth-child(1) .price');
     }
 
-
+    // Add an item to the shopping cart
     async addItemToCart(size = 1, color = 1){
         // get product name
         let product_name = await this.txtName.getText();

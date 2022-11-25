@@ -1,3 +1,4 @@
+const fs = require('fs')
 
 
 const Page = require('./page');
@@ -38,6 +39,20 @@ class LoginPage extends Page {
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();
     }
+
+    // Loads a random username-password pair from the login data file
+    loadRandomLoginInfo(){
+        const path = "\\..\\data\\login.data.json";
+
+        const fileEncoding = "utf8"
+
+        let users = JSON.parse(fs.readFileSync(__dirname+path));
+
+        const user = users[Math.floor( Math.random() * (users.length-1) )];
+
+        return user;
+    }
+
 
     /**
      * overwrite specific options to adapt it to page object
